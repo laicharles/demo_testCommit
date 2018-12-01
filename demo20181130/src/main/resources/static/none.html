@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
+          name="viewport">
 </head>
 <body>
 <div id="captcha"></div>
-<button type="button" id='register'>注册</button>
+<button id='register' type="button">注册</button>
 
 <script>
     window.NVC_Opt = {
         //无痕配置 && 滑动验证、刮刮卡通用配置
-        appkey:'FFFF0N000000000072D6',
-        scene:'nvc_login',
-        isH5:false,
-        popUp:false,
-        renderTo:'#captcha',
-        nvcCallback:function(data){
+        appkey: 'FFFF0N000000000072D6',
+        scene: 'nvc_login',
+        isH5: false,
+        popUp: false,
+        renderTo: '#captcha',
+        nvcCallback: function (data) {
             // data为getNVCVal()的值，此函数为二次验证滑动或者刮刮卡通过后的回调函数
             // data跟业务请求一起上传，由后端请求AnalyzeNvc接口，接口会返回100或者900
         },
-        trans: {"key1": "code300","nvcCode":400},
+        trans: {"key1": "code300", "nvcCode": 400},
         language: "cn",
         //滑动验证长度配置
         customWidth: 300,
@@ -37,7 +38,8 @@
         bg_back_pass: '//img.alicdn.com/tfs/TB1KDxCSVXXXXasXFXXXXXXXXXX-100-80.png',
         obj_error: '//img.alicdn.com/tfs/TB1q9yTltfJ8KJjy0FeXXXKEXXa-50-74.png',
         bg_back_fail: '//img.alicdn.com/tfs/TB1w2oOSFXXXXb4XpXXXXXXXXXX-100-80.png',
-        upLang:{"cn":{
+        upLang: {
+            "cn": {
                 _ggk_guide: "请摁住鼠标左键，刮出两面盾牌",
                 _ggk_success: "恭喜您成功刮出盾牌<br/>继续下一步操作吧",
                 _ggk_loading: "加载中",
@@ -47,46 +49,47 @@
                 _ggk_too_fast: ['您刮得太快啦<br/>请', "javascript:noCaptcha.reset()", '再来一次', '或', "http://survey.taobao.com/survey/QgzQDdDd?token=%TOKEN", '反馈问题']
             }
         }
-    }
+    };
 
-    function yourRegisterRequest(url, params){
-        var callbackName = ('jsonp_' + Math.random()).replace('.', '')
-        params += '&callback=' + callbackName
-        var o_scripts = document.getElementsByTagName("script")[0]
-        var o_s = document.createElement('script')
+    function yourRegisterRequest(url, params) {
+        var callbackName = ('jsonp_' + Math.random()).replace('.', '');
+        params += '&callback=' + callbackName;
+        var o_scripts = document.getElementsByTagName("script")[0];
+        var o_s = document.createElement('script');
         o_scripts.parentNode.insertBefore(o_s, o_scripts);
         //您注册请求的业务回调
-        window[callbackName] = function(json) {
-            if(json.result.code == 400) {
+        window[callbackName] = function (json) {
+            if (json.result.code == 400) {
                 //唤醒滑动验证
-                getNC().then(function(){
+                getNC().then(function () {
                     _nvc_nc.upLang('cn', {
                         _startTEXT: "请按住滑块，拖动到最右边",
                         _yesTEXT: "验证通过",
                         _error300: "哎呀，出错了，点击<a href=\"javascript:__nc.reset()\">刷新</a>再来一次",
                         _errorNetwork: "网络不给力，请<a href=\"javascript:__nc.reset()\">点击刷新</a>",
-                    })
+                    });
                     _nvc_nc.reset()
                 })
             } else if (json.result.code == 600) {
                 //唤醒刮刮卡
-                getSC().then(function(){})
+                getSC().then(function () {
+                })
             } else if (json.result.code == 100 || json.result.code == 200) {
                 //注册成功
-                nvcReset()
+                nvcReset();
                 alert("register success!")
             } else if (json.result.code == 800 || json.result.code == 900) {
                 //直接拦截
-                nvcReset()
+                nvcReset();
                 alert("register failed!")
             }
-        }
+        };
         o_s.src = url + '?' + params
     }
 
-    document.getElementById('register').onclick = function() {
+    document.getElementById('register').onclick = function () {
         // 以下getNVCVal()的值，跟随业务请求一起上传，由后端请求AnalyzeNvc接口，返回200，400，600或者800
-        var params = 'a=' + getNVCVal()
+        var params = 'a=' + getNVCVal();
         yourRegisterRequest('http://bb.ngrok.xiaomiqiu.cn/nonenvc/outMessage', params)
     }
 </script>

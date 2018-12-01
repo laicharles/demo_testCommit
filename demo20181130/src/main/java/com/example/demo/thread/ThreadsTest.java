@@ -11,12 +11,12 @@ import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 public class ThreadsTest {
-    public static String listToStr(List<String> list){
+    public static String listToStr(List<String> list) {
         StringBuffer str = new StringBuffer();
         Random random = new Random(10);
-        Map<Integer,List<String>> group = list.parallelStream().collect(Collectors.groupingBy(e -> random.nextInt(100)));
+        Map<Integer, List<String>> group = list.parallelStream().collect(Collectors.groupingBy(e -> random.nextInt(100)));
         group.values().parallelStream().forEach(e -> e.forEach(str::append));
-        System.out.println("method1: "+str.toString());
+        System.out.println("method1: " + str.toString());
         return str.toString();
     }
 
@@ -50,17 +50,17 @@ public class ThreadsTest {
             ret.append(future.get());
         }
         executorService.shutdown();
-        System.out.println("method2: "+ret.toString());
+        System.out.println("method2: " + ret.toString());
         return ret.toString();
     }
 
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         List<String> list = new ArrayList<>();
-        for(int i=0;i<1000;i++){
+        for (int i = 0; i < 1000; i++) {
             list.add(String.valueOf(i));
         }
-        list2Str(list,10);
+        list2Str(list, 10);
         listToStr(list);
     }
 

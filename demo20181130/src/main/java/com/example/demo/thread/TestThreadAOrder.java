@@ -9,12 +9,12 @@ public class TestThreadAOrder {
 
     public static List<String> OutPutByOrder(List<String> StringList, final int threadSize) {
 
-        ExecutorService executorService = Executors.newFixedThreadPool(threadSize);
+        //ExecutorService executorService = Executors.newFixedThreadPool(threadSize);
 /*
 
         new ThreadPoolExecutor(threadSize, threadSize, 1000, TimeUnit.DAYS, new LinkedBlockingQueue<Runnable>());
-
-        ThreadPoolExecutor   executor=       new ThreadPoolExecutor(threadSize, threadSize,0L, TimeUnit.MILLISECONDS,  new LinkedBlockingQueue<Runnable>());*/
+*/
+        ThreadPoolExecutor executorService = new ThreadPoolExecutor(threadSize, threadSize, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(threadSize));
         List<Future<List<String>>> futures = new ArrayList<Future<List<String>>>(threadSize);
 
 
@@ -29,14 +29,12 @@ public class TestThreadAOrder {
                 @Override
                 public List<String> call() throws Exception {
 
-
                     List<String> list = new ArrayList<String>(task.size());
 
                     for (String str : task
                     ) {
                         list.add(str);
                     }
-
 
                     return list;
                 }
@@ -73,7 +71,6 @@ public class TestThreadAOrder {
         return resultA;
 
 
-
     }
 
     public static void main(String[] args) {
@@ -81,7 +78,7 @@ public class TestThreadAOrder {
         for (int i = 0; i < 1000; i++) {
             list.add(String.valueOf(i));
         }
-       OutPutByOrder(list, 10);
+        OutPutByOrder(list, 10);
     }
 
 }

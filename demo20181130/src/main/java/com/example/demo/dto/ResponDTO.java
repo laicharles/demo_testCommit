@@ -3,10 +3,10 @@ package com.example.demo.dto;
 public class ResponDTO {
 
 
-    private boolean  success;
+    private boolean success;
 
 
-    private ResultSovl  result;
+    private ResultSovl result;
 
 
     public boolean isSuccess() {
@@ -26,17 +26,22 @@ public class ResponDTO {
     }
 
 
+    public static class ResultSovl {
 
-    public  static   class   ResultSovl{
-
-        private  boolean success;
+        private boolean success;
 
 
         private String msg;
 
 
-        private  String code;
+        private String code;
 
+
+        public ResultSovl(boolean success, String msg, String code) {
+            this.success = success;
+            this.msg = msg;
+            this.code = code;
+        }
 
         public boolean isSuccess() {
             return success;
@@ -59,13 +64,6 @@ public class ResponDTO {
         }
 
         public void setCode(String code) {
-            this.code = code;
-        }
-
-
-        public ResultSovl(boolean success, String msg, String code) {
-            this.success = success;
-            this.msg = msg;
             this.code = code;
         }
     }

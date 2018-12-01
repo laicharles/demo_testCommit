@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <!-- 国内使用 -->
-    <script type="text/javascript" charset="utf-8" src="//g.alicdn.com/sd/ncpc/nc.js?t=2015052012"></script>
+    <script charset="utf-8" src="//g.alicdn.com/sd/ncpc/nc.js?t=2015052012" type="text/javascript"></script>
     <!-- 若您的主要用户来源于海外，请替换使用下面的js资源 -->
     <!-- <script type="text/javascript" charset="utf-8" src="//aeis.alicdn.com/sd/ncpc/nc.js?t=2015052012"></script> -->
 </head>
 <body>
-<div id="your-dom-id" class="nc-container"></div> <!--No-Captcha渲染的位置，其中 class 中必须包含 nc-container-->
+<div class="nc-container" id="your-dom-id"></div> <!--No-Captcha渲染的位置，其中 class 中必须包含 nc-container-->
 
 <script type="text/javascript">
     var nc_token = ["FFFF0N000000000072D6", (new Date()).getTime(), Math.random()].join(':');
@@ -19,13 +19,13 @@
             scene: "nc_login",
             token: nc_token,
             customWidth: 300,
-            trans:{"key1":"code0"},
+            trans: {"key1": "code0"},
             elementID: ["usernameID"],
             is_Opt: 0,
             language: "cn",
             isEnabled: true,
             timeout: 3000,
-            times:5,
+            times: 5,
             apimap: {
                 // 'analyze': '//a.com/nocaptcha/analyze.jsonp',
                 // 'get_captcha': '//b.com/get_captcha/ver3',
@@ -37,15 +37,14 @@
                 // 'umid_serUrl': 'https://g.com/service/um.json'
             },
             callback: function (data) {
-                window.console && console.log("nc_token------------------->"+nc_token)
-                window.console && console.log("csessionid------------------->"+data.csessionid)
-                window.console && console.log("sig------------------->"+data.sig)
-
+                window.console && console.log("nc_token------------------->" + nc_token);
+                window.console && console.log("csessionid------------------->" + data.csessionid);
+                window.console && console.log("sig------------------->" + data.sig)
 
 
             }
-        }
-    var nc = new noCaptcha(NC_Opt)
+        };
+    var nc = new noCaptcha(NC_Opt);
     nc.upLang('cn', {
         _startTEXT: "请按住滑块，拖动到最右边",
         _yesTEXT: "验证通过",

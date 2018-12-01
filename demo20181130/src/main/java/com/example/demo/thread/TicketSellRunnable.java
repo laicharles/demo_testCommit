@@ -10,10 +10,10 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class TicketSellRunnable implements Callable<List<String>> {
 
-    //定义一共有 50 张票，继承机制开启线程，资源是共享的，所以不用加 static
-    private int num = 50;
     //创建一个锁对象
     Lock l = new ReentrantLock();
+    //定义一共有 50 张票，继承机制开启线程，资源是共享的，所以不用加 static
+    private int num = 50;
 
     public static void main(String[] args) {
         TicketSellRunnable runnable = new TicketSellRunnable();
@@ -30,27 +30,27 @@ public class TicketSellRunnable implements Callable<List<String>> {
     @Override
     public List<String> call() throws Exception {
 
-        List<String>   bodyEntities =null;
+        List<String> bodyEntities = null;
 
         //票分 50 次卖完
-            for (int i = 0; i < 50; i++) {
-                //获取锁
-              l.lock();
-                try {
-                    if (num > 0) {
-                        //模拟卖一次票所需时间
-                        Thread.sleep(10);
-                        --num;
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    //释放锁
-                    l.unlock();
+        for (int i = 0; i < 50; i++) {
+            //获取锁
+            l.lock();
+            try {
+                if (num > 0) {
+                    //模拟卖一次票所需时间
+                    Thread.sleep(10);
+                    --num;
                 }
-                System.out.println(Thread.currentThread().getName() + "卖出一张票，剩余" + (num) + "张");
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                //释放锁
+                l.unlock();
+            }
+            System.out.println(Thread.currentThread().getName() + "卖出一张票，剩余" + (num) + "张");
 
         }
-            return bodyEntities;
+        return bodyEntities;
     }
 }

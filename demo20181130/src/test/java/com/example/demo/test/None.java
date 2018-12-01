@@ -10,10 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 
-
-
 public class None {
-
 
 
     /**
@@ -33,7 +30,7 @@ public class None {
         }
 
         @Test
-        public void test(){
+        public void test() {
             AnalyzeNvcRequest request = new AnalyzeNvcRequest();
             request.setData("xxx");//必填参数，前端获取getNVCVal函数的值
             request.setScoreJsonStr("{\"200\":\"PASS\",\"400\":\"NC\",\"600\":\"SC\",\"800\":\"BLOCK\"}");// 根据需求填写
@@ -41,20 +38,20 @@ public class None {
             try {
                 AnalyzeNvcResponse response = client.getAcsResponse(request);
 
-             if (response.getBizCode()=="100")
-                if(response.getBizCode()== "100") {
-                    System.out.println("验签通过");
-                } else if (response.getBizCode() == "200") {
-                    System.out.println("直接通过");
-                } else if (response.getBizCode() == "400") {
-                    System.out.println("前端弹出nc");
-                } else if (response.getBizCode() == "600") {
-                    System.out.println("前端弹出sc");
-                } else if (response.getBizCode() == "800") {
-                    System.out.println("直接拦截");
-                } else if (response.getBizCode() == "900") {
-                    System.out.println("验签失败");
-                }
+                if (response.getBizCode() == "100")
+                    if (response.getBizCode() == "100") {
+                        System.out.println("验签通过");
+                    } else if (response.getBizCode() == "200") {
+                        System.out.println("直接通过");
+                    } else if (response.getBizCode() == "400") {
+                        System.out.println("前端弹出nc");
+                    } else if (response.getBizCode() == "600") {
+                        System.out.println("前端弹出sc");
+                    } else if (response.getBizCode() == "800") {
+                        System.out.println("直接拦截");
+                    } else if (response.getBizCode() == "900") {
+                        System.out.println("验签失败");
+                    }
                 // TODO
             } catch (Exception e) {
                 e.printStackTrace();

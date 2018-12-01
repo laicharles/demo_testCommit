@@ -1,9 +1,10 @@
 package com.example.demo.itComman;
 
 public class ItcommanTest {
-    private String  name;
-    public  void main(String[] args) {//sout
-       System.out.println();
+    private String name;
+
+    public void main(String[] args) {//sout
+        System.out.println();
 
         //soutp
         System.out.println("args = [" + args + "]");
@@ -20,7 +21,7 @@ public class ItcommanTest {
         System.out.println("args = [" + args + "]");
     }
 
-    public  void test(){
+    public void test() {
 
         System.out.println("ItcommanTest.test");
 

@@ -2,9 +2,9 @@ package com.example.demo.entity;
 
 public class BodyEntity {
 
-    private  String id;
+    private String id;
 
-    private  String name;
+    private String name;
 
     public String getId() {
         return id;
