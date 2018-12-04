@@ -29,7 +29,7 @@ public class NoneNVCController {
         //实际的业务功能
         ResponDTO dto = new ResponDTO();
         dto.setSuccess(true);
-        ResponDTO.ResultSovl resultSovl = new ResponDTO.ResultSovl(true, "ok", "5200");
+        ResponDTO.ResultSovl resultSovl = new ResponDTO.ResultSovl(true, "ok", "200");
 
         dto.setResult(resultSovl);
 

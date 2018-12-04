@@ -35,7 +35,7 @@ public class AfsCheckUtils {
     private String domain;
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public String getNvcAnalyzeMessage(String a, String callback) {
+    public String getNvcAnalyzeMessage(String getNVCVal) {
         IClientProfile profile = DefaultProfile.getProfile(reqionId, accessKey, accessSecret);
         IAcsClient client = null;
         //YOUR ACCESS_KEY、YOUR ACCESS_SECRET请替换成您的阿里云accesskey id和secret
@@ -49,7 +49,7 @@ public class AfsCheckUtils {
         }
 
         AnalyzeNvcRequest request = new AnalyzeNvcRequest();
-        request.setData(a);//必填参数，前端获取getNVCVal函数的值
+        request.setData(getNVCVal);//必填参数，前端获取getNVCVal函数的值
         request.setScoreJsonStr("{\"200\":\"PASS\",\"400\":\"NC\",\"600\":\"SC\",\"800\":\"BLOCK\"}");// 根据需求填写
         AnalyzeNvcResponse response = null;
         String bizCode ="";
@@ -61,7 +61,6 @@ public class AfsCheckUtils {
             return bizCode;
         } catch (Exception e) {
             logger.error("aliyun  return errorMess  "+e.getMessage());
-            bizCode="6000";
         }
 
         return bizCode;

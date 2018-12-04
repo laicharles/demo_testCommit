@@ -59,7 +59,7 @@
         o_scripts.parentNode.insertBefore(o_s, o_scripts);
         //您注册请求的业务回调
         window[callbackName] = function (json) {
-            if (json.result.code == 6400) {
+            if (json.result.code == 400) {
                 //唤醒滑动验证
                 getNC().then(function () {
                     _nvc_nc.upLang('cn', {
@@ -70,15 +70,15 @@
                     });
                     _nvc_nc.reset()
                 })
-            } else if (json.result.code == 6600) {
+            } else if (json.result.code == 600) {
                 //唤醒刮刮卡
                 getSC().then(function () {
                 })
-            } else if (json.result.code == 6100 || json.result.code == 6200) {
+            } else if (json.result.code == 100 || json.result.code == 200) {
                 //注册成功
                 nvcReset();
                 alert("register success!")
-            } else if (json.result.code == 6800 || json.result.code == 6900) {
+            } else if (json.result.code == 800 || json.result.code == 900) {
                 //直接拦截
                 nvcReset();
                 alert("register failed!")
@@ -88,7 +88,7 @@
     }
 
     document.getElementById('register').onclick = function () {
-        // 以下getNVCVal()的值，跟随业务请求一起上传，由后端请求AnalyzeNvc接口，返回6200，6400，6600或者6800
+        // 以下getNVCVal()的值，跟随业务请求一起上传，由后端请求AnalyzeNvc接口，返回200，400，600或者800
         var params = 'a=' + getNVCVal();
         yourRegisterRequest('http://localhost:8080/nonenvc/outMessage', params)
     }
