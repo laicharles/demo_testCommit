@@ -16,7 +16,7 @@ public class ThreadsTest {
         Random random = new Random(10);
         Map<Integer, List<String>> group = list.parallelStream().collect(Collectors.groupingBy(e -> random.nextInt(100)));
         group.values().parallelStream().forEach(e -> e.forEach(str::append));
-        System.out.println("method1: " + str.toString());
+      //  System.out.println("method1: " + str.toString());
         return str.toString();
     }
 

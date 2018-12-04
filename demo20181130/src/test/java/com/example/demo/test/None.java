@@ -12,10 +12,6 @@ import org.junit.Test;
 
 public class None {
 
-
-    /**
-     *
-     */
     public class TestAfsCheck {
 
         IAcsClient client = null;

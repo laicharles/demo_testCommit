@@ -59,31 +59,29 @@
         </dependency>
 
 
-       <!-- <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>1.8.10</version>
-        </dependency>-->
+        <!-- <dependency>
+             <groupId>org.aspectj</groupId>
+             <artifactId>aspectjrt</artifactId>
+             <version>1.8.10</version>
+         </dependency>-->
     </dependencies>
-<!--
+    <!--
 
 
-    <dependencies>
-        <dependency>
-            <groupId>org.aliyun.sdk</groupId>
-            <artifactId>aliyun-java-sdk-afs</artifactId>
+        <dependencies>
+            <dependency>
+                <groupId>org.aliyun.sdk</groupId>
+                <artifactId>aliyun-java-sdk-afs</artifactId>
 
-        </dependency>
+            </dependency>
 
-        <dependency>
-            <groupId>org.aliyun.sdk</groupId>
-            <artifactId>aliyun-java-sdk-core</artifactId>
+            <dependency>
+                <groupId>org.aliyun.sdk</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
 
-        </dependency>
-    </dependencies>
--->
-
-
+            </dependency>
+        </dependencies>
+    -->
 
 
     <build>
