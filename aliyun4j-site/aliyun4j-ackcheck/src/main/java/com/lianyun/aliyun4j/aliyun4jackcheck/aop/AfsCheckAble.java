@@ -18,11 +18,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
+
 /**
- *
+ * @param
  * @author charleslai@139.com
  * @date 2018-12-03
- * @param
  * @return
  */
 
@@ -71,8 +71,10 @@ public class AfsCheckAble {
             /*dto.setSuccess(true);
             ResponDTO.ResultSovl resultSovl = new ResponDTO.ResultSovl(true, "ok", bizCode);
             dto.setResult(resultSovl);*/
-
+            bizCode= "6"+bizCode;
+            logger.info(" lianyun  throw  code " + bizCode);
             throw new AfsCheckException("aliyun AfcCheck Exception", bizCode);
+
         }
 
         //return new JSONPObject(map.get(parameterNames[1]), dto);

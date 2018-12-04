@@ -21,7 +21,7 @@
             // data为getNVCVal()的值，此函数为二次验证滑动或者刮刮卡通过后的回调函数
             // data跟业务请求一起上传，由后端请求AnalyzeNvc接口，接口会返回100或者900
         },
-        trans: {"key1": "code300", "nvcCode": 400},
+        trans: {"key1": "code0", "nvcCode": 400},
         language: "cn",
         //滑动验证长度配置
         customWidth: 300,
@@ -59,7 +59,7 @@
         o_scripts.parentNode.insertBefore(o_s, o_scripts);
         //您注册请求的业务回调
         window[callbackName] = function (json) {
-            if (json.result.code == 400) {
+            if (json.result.code == 6400) {
                 //唤醒滑动验证
                 getNC().then(function () {
                     _nvc_nc.upLang('cn', {
@@ -70,15 +70,15 @@
                     });
                     _nvc_nc.reset()
                 })
-            } else if (json.result.code == 600) {
+            } else if (json.result.code == 6600) {
                 //唤醒刮刮卡
                 getSC().then(function () {
                 })
-            } else if (json.result.code == 100 || json.result.code == 200) {
+            } else if (json.result.code == 6100 || json.result.code == 6200) {
                 //注册成功
                 nvcReset();
                 alert("register success!")
-            } else if (json.result.code == 800 || json.result.code == 900) {
+            } else if (json.result.code == 6800 || json.result.code == 6900) {
                 //直接拦截
                 nvcReset();
                 alert("register failed!")
@@ -88,9 +88,9 @@
     }
 
     document.getElementById('register').onclick = function () {
-        // 以下getNVCVal()的值，跟随业务请求一起上传，由后端请求AnalyzeNvc接口，返回200，400，600或者800
+        // 以下getNVCVal()的值，跟随业务请求一起上传，由后端请求AnalyzeNvc接口，返回6200，6400，6600或者6800
         var params = 'a=' + getNVCVal();
-        yourRegisterRequest('http://bb.ngrok.xiaomiqiu.cn/nonenvc/outMessage', params)
+        yourRegisterRequest('http://localhost:8080/nonenvc/outMessage', params)
     }
 </script>
 <script src="//g.alicdn.com/sd/nvc/1.1.112/guide.js"></script>

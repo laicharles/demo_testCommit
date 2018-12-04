@@ -7,11 +7,11 @@ import com.lianyun.aliyun4j.aliyun4jackcheck.dto.ResponDTO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 /**
- *
+ * @param
  * @author charleslai@139.com
  * @date 2018-12-03
- * @param
  * @return
  */
 
@@ -29,7 +29,7 @@ public class NoneNVCController {
         //实际的业务功能
         ResponDTO dto = new ResponDTO();
         dto.setSuccess(true);
-        ResponDTO.ResultSovl resultSovl = new ResponDTO.ResultSovl(true, "ok", "200");
+        ResponDTO.ResultSovl resultSovl = new ResponDTO.ResultSovl(true, "ok", "5200");
 
         dto.setResult(resultSovl);
 

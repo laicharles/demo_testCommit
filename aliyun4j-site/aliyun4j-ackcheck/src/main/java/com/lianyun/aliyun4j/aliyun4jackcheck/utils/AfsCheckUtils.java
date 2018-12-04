@@ -7,13 +7,15 @@ import com.aliyuncs.afs.model.v20180112.AnalyzeNvcResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+
 /**
- *
+ * @param
  * @author charleslai@139.com
  * @date 2018-12-03
- * @param
  * @return
  */
 
@@ -31,6 +33,7 @@ public class AfsCheckUtils {
     private String product;
     @Value("${org.aliyun.sdk.nc.domain}")
     private String domain;
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public String getNvcAnalyzeMessage(String a, String callback) {
         IClientProfile profile = DefaultProfile.getProfile(reqionId, accessKey, accessSecret);
@@ -49,28 +52,19 @@ public class AfsCheckUtils {
         request.setData(a);//必填参数，前端获取getNVCVal函数的值
         request.setScoreJsonStr("{\"200\":\"PASS\",\"400\":\"NC\",\"600\":\"SC\",\"800\":\"BLOCK\"}");// 根据需求填写
         AnalyzeNvcResponse response = null;
+        String bizCode ="";
         try {
             response = client.getAcsResponse(request);
 
-            String bizCode = response.getBizCode();
-            if ("100".equals(bizCode)) {
-                System.out.println("验签通过");
-            } else if ("200".equals(bizCode)) {
-                System.out.println("直接通过");
-            } else if ("400".equals(bizCode)) {
-                System.out.println("前端弹出nc");
-            } else if ("600".equals(bizCode)) {
-                System.out.println("前端弹出sc");
-            } else if ("800".equals(bizCode)) {
-                System.out.println("直接拦截");
-            } else if ("900".equals(bizCode)) {
-                System.out.println("验签失败");
-            }
-
+             bizCode = response.getBizCode();
+            logger.info("aliyun  return code  " + bizCode);
+            return bizCode;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("aliyun  return errorMess  "+e.getMessage());
+            bizCode="6000";
         }
-        return response.getBizCode();
+
+        return bizCode;
     }
 
 
