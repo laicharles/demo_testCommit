@@ -41,26 +41,23 @@ public class AfsCheckUtils {
         //YOUR ACCESS_KEY、YOUR ACCESS_SECRET请替换成您的阿里云accesskey id和secret
         //IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", "YOUR ACCESS_KEY", "YOUR ACCESS_SECRET");
         client = new DefaultAcsClient(profile);
-
         try {
             DefaultProfile.addEndpoint(endpoinName, reqionId, product, domain);
         } catch (ClientException e) {
             e.printStackTrace();
         }
-
         AnalyzeNvcRequest request = new AnalyzeNvcRequest();
         request.setData(getNVCVal);//必填参数，前端获取getNVCVal函数的值
         request.setScoreJsonStr("{\"200\":\"PASS\",\"400\":\"NC\",\"600\":\"SC\",\"800\":\"BLOCK\"}");// 根据需求填写
         AnalyzeNvcResponse response = null;
-        String bizCode ="";
+        String bizCode = "";
         try {
             response = client.getAcsResponse(request);
-
-             bizCode = response.getBizCode();
+            bizCode = response.getBizCode();
             logger.info("aliyun  return code  " + bizCode);
             return bizCode;
         } catch (Exception e) {
-            logger.error("aliyun  return errorMess  "+e.getMessage());
+            logger.error("aliyun  return errorMess  " + e.getMessage());
         }
 
         return bizCode;

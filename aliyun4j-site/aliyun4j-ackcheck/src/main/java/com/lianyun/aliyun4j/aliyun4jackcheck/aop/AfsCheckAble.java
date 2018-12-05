@@ -2,6 +2,7 @@ package com.lianyun.aliyun4j.aliyun4jackcheck.aop;
 
 
 import com.lianyun.aliyun4j.aliyun4jackcheck.exception.AfsCheckException;
+import com.lianyun.aliyun4j.aliyun4jackcheck.interfaces.AfsNVCVal;
 import com.lianyun.aliyun4j.aliyun4jackcheck.utils.AfsCheckUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -33,6 +34,14 @@ public class AfsCheckAble {
     @Autowired
     private AfsCheckUtils afsCheckUtils;
 
+    /*@Autowired
+
+    HttpServletRequest request;*/
+
+
+    @Autowired
+    private AfsNVCVal afsNVCVal;
+
 
     @Pointcut("@annotation(com.lianyun.aliyun4j.aliyun4jackcheck.annotation.AfsCheck)")
     public void pointcut() {
@@ -44,7 +53,7 @@ public class AfsCheckAble {
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 
-        String getNVCVal = request.getHeader("getNVCVal");
+        String getNVCVal = afsNVCVal.getNVCVal(request);
 
         if (getNVCVal != null) {
             String bizCode = afsCheckUtils.getNvcAnalyzeMessage(getNVCVal);
